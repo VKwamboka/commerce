@@ -24,4 +24,7 @@ export class RegisterComponent {
     })
   }
 
+  register(){
+    console.log("wueh")
+  }
 }
