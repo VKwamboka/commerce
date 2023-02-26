@@ -4,7 +4,8 @@ import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../services/auth/auth.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class RegisterComponent {
  
   constructor( private fb: FormBuilder,private router:Router, private userService:AuthService){}
-   
+ 
 
   registerForm!:FormGroup
   ngOnInit(): void {
@@ -35,6 +36,8 @@ export class RegisterComponent {
      this.userService.postUser(user)
       .subscribe((response: User) => {
         console.log(response);
+
+      //  console.log()
         // users.push({ name: response.name, email: response.email, password: response.password, isAdmin: response.isAdmin=false});
       });
  
