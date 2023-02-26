@@ -2,8 +2,8 @@ export interface User{
     name:string
     email:string
     password:string 
+    confirmPassword:string
     isAdmin?:boolean 
-    // confirm_password:string
 }
 
 export interface login{

@@ -24,7 +24,7 @@ export class RegisterComponent {
       name:[null, [Validators.required, Validators.min(1)]],
       email:[null, [Validators.required, Validators.email]],
       password:[null, [Validators.required, Validators.min(1)]],
-      confirm_password:[null, [Validators.required, Validators.min(1)]]  
+      confirmPassword:[null, [Validators.required, Validators.min(1)]]  
     })
   }
 
@@ -35,7 +35,7 @@ export class RegisterComponent {
      this.userService.postUser(user)
       .subscribe((response: User) => {
         console.log(response);
-        users.push({ name: response.name, email: response.email, password: response.password, isAdmin: response.isAdmin=false});
+        // users.push({ name: response.name, email: response.email, password: response.password, isAdmin: response.isAdmin=false});
       });
  
   }
