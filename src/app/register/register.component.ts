@@ -16,30 +16,47 @@ import { throwError } from 'rxjs';
 })
 export class RegisterComponent {
  
-  constructor( private fb: FormBuilder,private router:Router, private userService:AuthService){}
- 
+  error = false
+  errorMessage = ''
 
+  constructor( private fb: FormBuilder,private router:Router, private userService:AuthService){}
+  // isLoggedIn=false
+  private tokenKey = 'token';
+  
+  // / logic
+     
   registerForm!:FormGroup
   ngOnInit(): void {
     this.registerForm= this.fb.group({
-      name:[null, [Validators.required, Validators.min(1)]],
+      name:[null, Validators.required],
       email:[null, [Validators.required, Validators.email]],
       password:[null, [Validators.required, Validators.min(1)]],
       confirmPassword:[null, [Validators.required, Validators.min(1)]]  
     })
   }
 
+ 
+
   register(){
+    console.log(this.registerForm.value)
     let user:User = this.registerForm.value
     let users: User[] = [];
     console.log(this.registerForm.value)
      this.userService.postUser(user)
       .subscribe((response: User) => {
         console.log(response);
-
-      //  console.log()
+       
+        localStorage.setItem(this.tokenKey, response.JWT);
+        this.userService.setLoginTrue()
+        this.router.navigate(['/']);
         // users.push({ name: response.name, email: response.email, password: response.password, isAdmin: response.isAdmin=false});
-      });
+      },error=>{
+          this.error = true
+          this.errorMessage = error.error
+          console.log(error.error)
+      });     
  
   }
+
+ 
 }
