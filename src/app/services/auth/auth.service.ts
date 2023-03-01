@@ -41,6 +41,7 @@ export class AuthService {
 
 userUrl:string = "http://localhost:5500/api/users/signup"
 
+
  public postUser(user:User):Observable<User> {
     return this.http.post<User>(this.userUrl, user)
    
